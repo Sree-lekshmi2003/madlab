@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <!-- First image -->
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/image1"
+        android:contentDescription="First Image" />
+
+    <!-- Second image (hidden initially) -->
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/image2"
+        android:visibility="gone"
+        android:contentDescription="Second Image" />
+
+</FrameLayout>
+
+
+
+
+package com.example.toggle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageView img1, img2;
+    boolean showingFirst = true;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        img1 = findViewById(R.id.image1);
+        img2 = findViewById(R.id.image2);
+        FrameLayout frame = findViewById(R.id.frameLayout);
+
+        // Toggle images when the frame is clicked
+        frame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (showingFirst) {
+                    img1.setVisibility(View.GONE);
+                    img2.setVisibility(View.VISIBLE);
+                } else {
+                    img1.setVisibility(View.VISIBLE);
+                    img2.setVisibility(View.GONE);
+                }
+                showingFirst = !showingFirst;
+            }
+        });
+    }
+}
